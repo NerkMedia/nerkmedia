@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nerk Media — Mediengestaltung</title>
+<meta name="description" content="Nerk Media: Studio für Grafikdesign, Branding und Motion Design.">
+<link rel="icon" type="image/svg+xml" href="nerk-media-logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f1ea;
+    --panel:#fbf9f3;
+    --border:#d9d6cc;
+    --gray-light:#b4b2a9;
+    --gray-mid:#888780;
+    --text:#21201d;
+    --muted:#6b6963;
+    --coral:#d85a30;
+    --coral-dark:#a8431f;
+    --font-display:'Bebas Neue',sans-serif;
+    --font-body:'DM Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 32px;}
+  :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,241,234,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:1100px;margin:0 auto;padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .brand img{height:34px;width:auto;}
+  .nav-links{display:flex;gap:28px;font-size:15px;font-weight:500;}
+  .nav-links a{text-decoration:none;color:var(--muted);transition:color 0.15s;}
+  .nav-links a:hover{color:var(--text);}
+
+  /* ---------- Section shell ---------- */
+  section{padding:96px 0;}
+  section:not(:last-of-type){border-bottom:1px solid var(--border);}
+  h2{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(30px,4vw,42px);
+    letter-spacing:0.01em;
+    margin-bottom:44px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 110px;
+    border-bottom:1px solid var(--border);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(42px,6.2vw,76px);
+    line-height:1.02;
+    letter-spacing:0.01em;
+    margin-bottom:26px;
+  }
+  h1 span{color:var(--coral);}
+  .hero-sub{
+    font-size:18px;
+    color:var(--muted);
+    max-width:48ch;
+    margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:8px;
+    text-decoration:none;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    display:inline-block;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--coral);color:#fff;}
+  .btn-primary:hover{background:var(--coral-dark);}
+  .btn-secondary{border-color:var(--border);color:var(--text);}
+  .btn-secondary:hover{border-color:var(--gray-mid);}
+
+  .stack{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:380px;
+    margin:0 auto;
+  }
+  .stack-layer{
+    position:absolute;
+    border-radius:16px;
+    inset:0;
+  }
+  .stack-layer.l1{
+    border:5px solid var(--gray-light);
+    transform:translate(-36px,-36px);
+  }
+  .stack-layer.l2{
+    border:5px solid var(--gray-mid);
+    transform:translate(-18px,-18px);
+  }
+  .stack-layer.l3{
+    background:var(--coral);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 24px 48px -24px rgba(33,32,29,0.35);
+  }
+  .stack-layer.l3 img{height:38%;width:auto;filter:brightness(0) invert(1);}
+
+  /* ---------- Über mich ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-grid p{color:var(--muted);max-width:52ch;margin-bottom:18px;font-size:16px;}
+  .about-marks{display:flex;gap:10px;margin-bottom:28px;}
+  .mark{width:14px;height:14px;border-radius:4px;}
+  .mark.m1{background:var(--gray-light);}
+  .mark.m2{background:var(--gray-mid);}
+  .mark.m3{background:var(--coral);}
+
+  /* ---------- Leistungen ---------- */
+  .services{display:flex;flex-direction:column;}
+  .service{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:24px;
+    padding:28px 0;
+    border-top:1px solid var(--border);
+  }
+  .services .service:last-child{border-bottom:1px solid var(--border);}
+  .service-mark{
+    width:40px;height:40px;
+    border-radius:10px;
+    background:var(--coral);
+    position:relative;
+  }
+  .service-mark::before{
+    content:'';position:absolute;
+    top:-8px;left:-8px;width:100%;height:100%;
+    border:3px solid var(--gray-light);border-radius:10px;
+    z-index:-1;
+  }
+  .service h3{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:24px;
+    letter-spacing:0.01em;
+    margin-bottom:8px;
+  }
+  .service p{color:var(--muted);font-size:15px;max-width:56ch;}
+
+  /* ---------- Portfolio ---------- */
+  .portfolio-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:32px;
+  }
+  .project{position:relative;}
+  .project-frame{
+    aspect-ratio:4/3;
+    border-radius:12px;
+    background:repeating-linear-gradient(135deg,var(--panel) 0 3px,var(--border) 3px 4px);
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .project-frame::before{
+    content:'';position:absolute;top:14px;left:14px;
+    width:26px;height:26px;border-radius:7px;
+    border:3px solid var(--gray-light);
+  }
+  .project-frame::after{
+    content:'';position:absolute;top:22px;left:22px;
+    width:26px;height:26px;border-radius:7px;
+    background:var(--coral);
+  }
+  .project h3{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:22px;
+    margin-top:18px;
+    margin-bottom:4px;
+  }
+  .project p{color:var(--muted);font-size:14px;}
+
+  /* ---------- Kontakt ---------- */
+  .contact-panel{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+  }
+  .contact-info p{color:var(--muted);margin-bottom:26px;max-width:38ch;}
+  .contact-line{
+    display:flex;justify-content:space-between;
+    font-size:15px;
+    padding:14px 0;
+    border-top:1px solid var(--border);
+  }
+  .contact-line:last-child{border-bottom:1px solid var(--border);}
+  .contact-line span:first-child{color:var(--muted);}
+  .contact-line span:last-child{font-weight:500;}
+  form{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:36px;
+  }
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block;font-size:13px;font-weight:700;
+    color:var(--muted);margin-bottom:8px;
+  }
+  .field input,.field select,.field textarea{
+    width:100%;
+    background:#fff;
+    border:1px solid var(--border);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:15px;
+    padding:12px 14px;
+    border-radius:8px;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    border-color:var(--coral);
+    outline:none;
+  }
+  .field textarea{resize:vertical;min-height:110px;}
+  .form-note{font-size:13px;color:var(--muted);margin-top:10px;}
+
+  footer{padding:36px 0;}
+  .footer-row{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;
+  }
+  .footer-row p{font-size:13px;color:var(--muted);}
+  .socials{display:flex;gap:20px;}
+  .socials a{
+    font-size:13px;font-weight:500;
+    text-decoration:none;color:var(--muted);
+    border-bottom:1px solid transparent;
+  }
+  .socials a:hover{color:var(--text);border-color:var(--coral);}
+
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .stack{order:-1;max-width:280px;}
+    .about-grid{grid-template-columns:1fr;}
+    .portfolio-grid{grid-template-columns:1fr;}
+    .contact-panel{grid-template-columns:1fr;}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px;}
+    .nav-inner{padding:14px 20px;}
+    .nav-links{gap:16px;font-size:14px;}
+    .hero{padding:60px 0 70px;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <img src="nerk-media-logo.svg" alt="Nerk Media Logo">
+    </a>
+    <nav class="nav-links">
+      <a href="#ueber">Über mich</a>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>Gestaltung mit <span>klarer Haltung.</span></h1>
+        <p class="hero-sub">Nerk Media ist das Studio für Grafikdesign, Branding und Motion Design — für Marken, die nicht im Mittelmaß verschwinden wollen.</p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn btn-primary">Portfolio ansehen</a>
+          <a href="#kontakt" class="btn btn-secondary">Projekt anfragen</a>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="stack-layer l1"></div>
+        <div class="stack-layer l2"></div>
+        <div class="stack-layer l3"><img src="nerk-media-logo.svg" alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber">
+  <div class="wrap">
+    <h2>Über mich</h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-marks">
+          <span class="mark m1"></span><span class="mark m2"></span><span class="mark m3"></span>
+        </div>
+        <p>Ich bin Mediengestalter mit einem klaren Blick für Form, Farbe und Timing. Mit Nerk Media entwickle ich visuelle Identitäten und bewegte Inhalte, die im Kopf bleiben statt im Rauschen unterzugehen.</p>
+        <p>Jedes Projekt beginnt bei null — mit der Marke, ihrer Zielgruppe und der Frage, was wirklich gesagt werden muss.</p>
+      </div>
+      <div>
+        <p>Diesen Abschnitt kannst du jederzeit durch deine eigene Bio, ein Portrait oder Referenzen ersetzen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="wrap">
+    <h2>Leistungen</h2>
+    <div class="services">
+      <div class="service">
+        <div class="service-mark"></div>
+        <div>
+          <h3>Grafikdesign & Branding</h3>
+          <p>Visuelle Identitäten, Logos und Key-Visuals als Fundament jeder weiteren Gestaltung.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-mark"></div>
+        <div>
+          <h3>Editorial & Print</h3>
+          <p>Broschüren, Kataloge und Layouts mit klarer Typografie und durchdachtem Raster.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-mark"></div>
+        <div>
+          <h3>Social-Media-Content</h3>
+          <p>Kurzformate und Grafiken für Instagram, LinkedIn und Co. — abgestimmt auf den jeweiligen Kanal.</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-mark"></div>
+        <div>
+          <h3>Motion Design & Animation</h3>
+          <p>Logo-Reveals, animierte Erklärgrafiken und Bewegtbild, das die Marke in Szene setzt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <h2>Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="project">
+        <div class="project-frame"></div>
+        <h3>Projekt 01</h3>
+        <p>Branding — Platzhalter für deine Fallstudie.</p>
+      </div>
+      <div class="project">
+        <div class="project-frame"></div>
+        <h3>Projekt 02</h3>
+        <p>Editorial — Platzhalter für deine Fallstudie.</p>
+      </div>
+      <div class="project">
+        <div class="project-frame"></div>
+        <h3>Projekt 03</h3>
+        <p>Motion Design — Platzhalter für deine Fallstudie.</p>
+      </div>
+      <div class="project">
+        <div class="project-frame"></div>
+        <h3>Projekt 04</h3>
+        <p>Social Media — Platzhalter für deine Fallstudie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <h2>Projekt anfragen</h2>
+    <div class="contact-panel">
+      <div class="contact-info">
+        <p>Erzähl mir kurz von deinem Projekt — Format, Umfang und Zeitrahmen reichen für den Anfang völlig aus.</p>
+        <div class="contact-line"><span>E-Mail</span><span>hallo@nerk-media.de</span></div>
+        <div class="contact-line"><span>Standort</span><span>Stuttgart, DE</span></div>
+        <div class="contact-line"><span>Antwortzeit</span><span>~2 Werktage</span></div>
+      </div>
+      <form action="mailto:hallo@nerk-media.de" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="Name" required>
+        </div>
+        <div class="field">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="E-Mail" required>
+        </div>
+        <div class="field">
+          <label for="art">Projektart</label>
+          <select id="art" name="Projektart">
+            <option>Grafikdesign / Branding</option>
+            <option>Editorial / Print</option>
+            <option>Social-Media-Content</option>
+            <option>Motion Design / Animation</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="nachricht">Nachricht</label>
+          <textarea id="nachricht" name="Nachricht" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Anfrage senden</button>
+        <p class="form-note">Öffnet dein E-Mail-Programm. Für ein Formular ohne E-Mail-Client eignet sich z. B. Formspree.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <p>Nerk Media © 2026 · Stuttgart</p>
+      <div class="socials">
+        <a href="#" rel="noopener">Instagram</a>
+        <a href="#" rel="noopener">Vimeo</a>
+        <a href="#" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
